@@ -1,15 +1,9 @@
-//
-//  CameraHandler.hpp
-//  CameraMulti
-//
-//  Created by Toni Axelsson on 2016-05-19.
-//  Copyright © 2016 Toni. All rights reserved.
-//
 
 #ifndef CameraHandler_hpp
 #define CameraHandler_hpp
 
 #include <opencv2/videoio/videoio.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 class CameraHandler {
     
