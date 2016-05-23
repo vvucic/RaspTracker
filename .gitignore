@@ -31,3 +31,6 @@
 build/
 bin/
 xcode/
+
+# OS X specific
+*.DS_Store
