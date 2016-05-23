@@ -38,4 +38,4 @@ private:
 
 #endif /* WQueue_hpp */
 
-#include "WQueue.tpp"
+#include "WQueue.inl"
