@@ -31,6 +31,13 @@ int main(int argc, const char* argv[]) {
 		
 		cv::Canny(frame, cannyFrame, 100, 200);
 		
+        cv::putText(cannyFrame,
+                    "RQueue: " + std::to_string(rawQueue.numItems()),
+                    cv::Point(5,20),
+                    CV_FONT_HERSHEY_DUPLEX,
+                    0.7,
+                    cv::Scalar(255,0,0));
+        
 		cv::imshow("Camera", cannyFrame);
 		
 		switch(cv::waitKey(10)) {
