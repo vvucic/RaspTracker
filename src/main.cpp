@@ -1,12 +1,11 @@
 
 #include <iostream>
 
-#include <opencv2/imgproc/imgproc.hpp>
-
-#include "WQueue.hpp"
+#include "Processor.hpp"
 #include "CameraHandler.hpp"
 
 WQueue<cv::Mat> rawQueue;
+WQueue<cv::Mat> procQueue;
 bool capture = true;
 
 void startCapture(CameraHandler&);
@@ -14,8 +13,9 @@ void startCapture(CameraHandler&);
 int main(int argc, const char* argv[]) {
     
     CameraHandler camHandler;
-    cv::Mat frame, cannyFrame;
+    cv::Mat frame;
     
+    // Open camera
     if (!camHandler.openCamera(0)) {
         std::cerr << "Could not open camera\n";
         return -1;
@@ -23,23 +23,31 @@ int main(int argc, const char* argv[]) {
     
     camHandler.setResolution(640,480);
     
+    // Start capturing frames in a seperate thread
     std::thread capThread(startCapture, std::ref(camHandler));
     
+    // Start processing frames in a seperate thread
+    Processor processor(rawQueue, procQueue);
+    std::thread procThread(&Processor::startProcessing, &processor);
+    
+    // Start GUI loop
     while(capture) {
 		
-		rawQueue.popItem(frame);
+        // Grab frame from processed frames queue
+		procQueue.popItem(frame);
 		
-		cv::Canny(frame, cannyFrame, 100, 200);
-		
-        cv::putText(cannyFrame,
+        // Add some text
+        cv::putText(frame,
                     "RQueue: " + std::to_string(rawQueue.numItems()),
                     cv::Point(5,20),
                     CV_FONT_HERSHEY_DUPLEX,
                     0.7,
                     cv::Scalar(255,0,0));
         
-		cv::imshow("Camera", cannyFrame);
+        // Show frame
+		cv::imshow("Camera", frame);
 		
+        // Handle possible key event
 		switch(cv::waitKey(10)) {
 			case 27:
 				capture = false;
@@ -49,7 +57,9 @@ int main(int argc, const char* argv[]) {
 		}
 	}
 	
+    // Join threads
 	capThread.join();
+    procThread.join();
     
     return 0;
 }
