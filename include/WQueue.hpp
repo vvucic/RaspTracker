@@ -51,10 +51,12 @@ WQueue<T>::~WQueue() {
 template<typename T>
 void WQueue<T>::pushItem(T item) {
     
-    if (numItems() > MAX_QUEUE_SIZE)
-		return;
+    int qs = numItems();
     
     std::unique_lock<std::mutex> mlock(m_mutex);
+    if (qs >= MAX_QUEUE_SIZE)
+        m_queue.pop();
+    
     m_queue.push(item);
     mlock.unlock();
     m_condv.notify_one();

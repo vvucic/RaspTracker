@@ -68,11 +68,11 @@ int main(int argc, const char* argv[]) {
                     cv::Scalar(255,0,0));
         
         cv::putText(frame,
-                    "RQueue: " + std::to_string(procQueue.numItems()),
+                    "PQueue: " + std::to_string(procQueue.numItems()),
                     cv::Point(5,60),
                     CV_FONT_HERSHEY_DUPLEX,
                     0.6,
-                    cv::Scalar(255,0,0));
+                    cv::Scalar(255,255,0));
         
         // Show frame
 		cv::imshow("Camera", frame);

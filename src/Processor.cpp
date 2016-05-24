@@ -17,7 +17,7 @@ void Processor::startProcessing() {
         m_inQueue.popItem(frame);
         
         
-        // Do what ever you want with the frame here
+        // Do whatever you want with the frame here
         
         
         // Push processed frame to outgoing queue
