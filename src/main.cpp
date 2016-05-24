@@ -41,7 +41,14 @@ int main(int argc, const char* argv[]) {
                     "RQueue: " + std::to_string(rawQueue.numItems()),
                     cv::Point(5,20),
                     CV_FONT_HERSHEY_DUPLEX,
-                    0.7,
+                    0.6,
+                    cv::Scalar(255,0,0));
+        
+        cv::putText(frame,
+                    "RQueue: " + std::to_string(procQueue.numItems()),
+                    cv::Point(5,40),
+                    CV_FONT_HERSHEY_DUPLEX,
+                    0.6,
                     cv::Scalar(255,0,0));
         
         // Show frame
