@@ -1,5 +1,6 @@
 
 #include "Processor.hpp"
+#include "GreenCircleDetector.hpp"
 
 Processor::Processor(WQueue<cv::Mat> &inQueue, WQueue<cv::Mat> &outqueue)
 : m_inQueue(inQueue), m_outQueue(outqueue)
@@ -10,19 +11,26 @@ Processor::Processor(WQueue<cv::Mat> &inQueue, WQueue<cv::Mat> &outqueue)
 void Processor::startProcessing() {
     
     cv::Mat frame;
-    
+	cv::Mat frame_processed;
+	GreenCircleDetector detector;
     while (shouldProcess()) {
         
-        // Grab frame from incoming queue
+        // Grab frame from incoming frames queue
         m_inQueue.popItem(frame);
         
-        
-        // Do whatever you want with the frame here
-        
+		// Do what ever you want with the frame here
+
+		detector.setImage(frame);
+		detector.getMarkedImage(frame_processed);
+         
         
         // Push processed frame to outgoing queue
-        m_outQueue.pushItem(frame);
+        m_outQueue.pushItem(frame_processed);
     }
+}
+
+void Processor::detectMovingObjects(cv::Mat &frame) {
+
 }
 
 bool Processor::shouldProcess() {
