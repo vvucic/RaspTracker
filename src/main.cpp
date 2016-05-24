@@ -13,9 +13,13 @@ double avgFPS = 0.0; // Holds the average FPS
 int fps1sec = 0; // Counter for number of frames during previous second
 std::chrono::system_clock::time_point start; // Time used when calculating FPS
 
+// Function prototypes
 void startCapture(CameraHandler&);
 void updateAvgFPS();
 std::string getFPSString(void);
+
+
+
 
 int main(int argc, const char* argv[]) {
     
@@ -49,7 +53,12 @@ int main(int argc, const char* argv[]) {
 		procQueue.popItem(frame);
 		
         // Add some text
-        cv::putText(frame, getFPSString(), cv::Point(5,20),cv::FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(0,255,0));
+        cv::putText(frame,
+                    getFPSString(),
+                    cv::Point(5,20),
+                    cv::FONT_HERSHEY_DUPLEX,
+                    0.5,
+                    cv::Scalar(0,255,0));
         
         cv::putText(frame,
                     "RQueue: " + std::to_string(rawQueue.numItems()),

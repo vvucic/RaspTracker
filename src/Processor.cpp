@@ -10,9 +10,10 @@ Processor::Processor(WQueue<cv::Mat> &inQueue, WQueue<cv::Mat> &outqueue)
 void Processor::startProcessing() {
     
     cv::Mat frame;
+    
     while (shouldProcess()) {
         
-        // Grab frame from incoming frames queue
+        // Grab frame from incoming queue
         m_inQueue.popItem(frame);
         
         
@@ -22,10 +23,6 @@ void Processor::startProcessing() {
         // Push processed frame to outgoing queue
         m_outQueue.pushItem(frame);
     }
-}
-
-void Processor::detectMovingObjects(cv::Mat &frame) {
-
 }
 
 bool Processor::shouldProcess() {

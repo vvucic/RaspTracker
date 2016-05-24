@@ -20,8 +20,6 @@ public:
     
 private:
     
-    void detectMovingObjects(cv::Mat &frame);
-    
     bool shouldProcess();
     
     WQueue<cv::Mat> &m_inQueue;
