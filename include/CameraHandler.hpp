@@ -13,7 +13,7 @@ public:
     
     bool setResolution(int width, int height);
     bool openCamera(int id = 1);
-    void operator>>(cv::Mat &frame);
+    void operator>>(cv::Mat &frame); // Grab frame
     
 private:
     

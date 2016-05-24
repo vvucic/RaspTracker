@@ -56,6 +56,9 @@ int main(int argc, const char* argv[]) {
 				break;
 		}
 	}
+    
+    // Stop process
+    processor.stopProcessing();
 	
     // Join threads
 	capThread.join();
