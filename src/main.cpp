@@ -53,7 +53,7 @@ int main(int argc, const char* argv[]) {
 		procQueue.popItem(frame);
 		
         // Add some text
-        cv::putText(frame,
+     /*   cv::putText(frame,
                     getFPSString(),
                     cv::Point(5,20),
                     cv::FONT_HERSHEY_DUPLEX,
@@ -73,7 +73,7 @@ int main(int argc, const char* argv[]) {
                     CV_FONT_HERSHEY_DUPLEX,
                     0.6,
                     cv::Scalar(255,255,0));
-        
+        */
         // Show frame
 		cv::imshow("Camera", frame);
 		
